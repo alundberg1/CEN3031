@@ -23,7 +23,15 @@ module.exports = function(req, res, next) {
       qs: options
       }, function(error, response, body) {
         //For ideas about response and error processing see https://opencagedata.com/tutorials/geocode-in-nodejs
-        
+       
+        const responseBody = JSON.parse(body);
+        const locations = responseBody["results"];
+        req.results = locations[0]['geometry'];
+        console.log(req.results);
+        //locations.forEach(location => {
+        //req.results = location['place'];
+        //});
+              
         //JSON.parse to get contents. Remember to look at the response's JSON format in open cage data
         
         /*Save the coordinates in req.results -> 
